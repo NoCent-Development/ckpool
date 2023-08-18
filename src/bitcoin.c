@@ -99,12 +99,11 @@ static const char *gbt_req = "{\"method\": \"getblocktemplate\", \"params\": [{\
  * required to assemble a mining template, storing it in a gbtbase_t structure */
 bool gen_gbtbase(connsock_t *cs, gbtbase_t *gbt)
 {
-	json_t *rules_array, *coinbase_aux, *res_val, *val;
+	json_t *rules_array, *res_val, *val;
 	const char *previousblockhash;
 	char hash_swap[32], tmp[32];
 	uint64_t coinbasevalue;
 	const char *target;
-	const char *flags;
 	const char *bits;
 	const char *rule;
 	int version;
@@ -144,11 +143,9 @@ bool gen_gbtbase(connsock_t *cs, gbtbase_t *gbt)
 	bits = json_string_value(json_object_get(res_val, "bits"));
 	height = json_integer_value(json_object_get(res_val, "height"));
 	coinbasevalue = json_integer_value(json_object_get(res_val, "coinbasevalue"));
-	coinbase_aux = json_object_get(res_val, "coinbaseaux");
-	flags = json_string_value(json_object_get(coinbase_aux, "flags"));
 
-	if (unlikely(!previousblockhash || !target || !version || !curtime || !bits || !coinbase_aux || !flags)) {
-		LOGERR("JSON failed to decode GBT %s %s %d %d %s %s", previousblockhash, target, version, curtime, bits, flags);
+	if (unlikely(!previousblockhash || !target || !version || !curtime || !bits)) {
+		LOGERR("JSON failed to decode GBT %s %s %d %d %s %s", previousblockhash, target, version, curtime, bits);
 		goto out;
 	}
 
@@ -185,8 +182,6 @@ bool gen_gbtbase(connsock_t *cs, gbtbase_t *gbt)
 	gbt->coinbasevalue = coinbasevalue;
 
 	gbt->height = height;
-
-	gbt->flags = strdup(flags);
 
 	ret = true;
 out:
