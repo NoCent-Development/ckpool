@@ -105,6 +105,7 @@ bool gen_gbtbase(connsock_t *cs, gbtbase_t *gbt)
 	uint64_t coinbasevalue;
 	const char *target;
 	const char *bits;
+	const char *flags;
 	const char *rule;
 	int version;
 	int curtime;
