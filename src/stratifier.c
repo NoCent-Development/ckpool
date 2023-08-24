@@ -571,6 +571,7 @@ static void generate_coinbase(const ckpool_t *ckp, workbase_t *wb)
 	}
 	else if (wb->flags == NULL) {
 		wb->flags = '\0';
+		len = 0;
 	}
 	else {
 		len = strlen(wb->flags) / 2;
