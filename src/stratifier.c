@@ -1564,7 +1564,7 @@ retry:
 		}
 	}
 
-	generate_coinbase(ckp, wb);
+	//generate_coinbase(ckp, wb);
 
 	add_base(ckp, sdata, wb, &new_block);
 
