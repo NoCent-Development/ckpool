@@ -576,7 +576,10 @@ static void generate_coinbase(const ckpool_t *ckp, workbase_t *wb)
 	else {
 		len = strlen(wb->flags) / 2;
 	}
-	
+	LOGDEBUG("flags:");
+	LOGDEBUG(wb->flags);
+	LOGDEBUG("Len:");
+	LOGDEBUG(len);
 	wb->coinb1bin[ofs++] = len;
 	hex2bin(wb->coinb1bin + ofs, wb->flags, len);
 	ofs += len;
