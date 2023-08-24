@@ -185,8 +185,8 @@ bool gen_gbtbase(connsock_t *cs, gbtbase_t *gbt)
 	gbt->coinbasevalue = coinbasevalue;
 
 	gbt->height = height;
-
-	gbt->flags = strdup(flags);
+	
+	gbt->flags = (flags) ? strdup(flags) : '\0';
 
 	ret = true;
 out:
