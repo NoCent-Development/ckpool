@@ -573,7 +573,7 @@ static void generate_coinbase(const ckpool_t *ckp, workbase_t *wb)
 		wb->flags = '\0';
 		len = 0;
 		LOGERR("Flags is null");
-		LOGERR(wb-flags);
+		LOGERR(wb->flags);
 	}
 	else {
 		len = strlen(wb->flags) / 2;
